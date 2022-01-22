@@ -17,10 +17,10 @@ fn main() {
 
         println!("Your guess: {}", guess);
 
-        let guess: u32 = guess
-            .trim()
-            .parse()
-            .expect("Invalid input, enter a valid number.");
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_)=> continue, 
+        };
 
         match guess.cmp(&secret_no) {
             Ordering::Equal => {
