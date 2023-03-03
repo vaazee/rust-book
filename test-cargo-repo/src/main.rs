@@ -10,8 +10,6 @@ fn main() {
 
     println!("The value of x is: {x}");
 
-
-
     let x: (i32, f64, u8) = (500, 6.4, 1);
 
     let _five_hundred = x.0;
@@ -27,7 +25,6 @@ fn main() {
 
     println!("The value of y is: {y}");
 
-
     let mut counter = 0;
 
     let result = loop {
@@ -39,8 +36,6 @@ fn main() {
     };
 
     println!("The result is {result}");
-
-
 
     let mut count = 0;
     'counting_up: loop {
@@ -62,8 +57,6 @@ fn main() {
     }
     println!("End count = {count}");
 
-
-
     let a = [10, 20, 30, 40, 50];
     let mut index = 0;
 
@@ -73,17 +66,42 @@ fn main() {
         index += 1;
     }
 
-
     let a = [10, 20, 30, 40, 50];
 
     for element in a {
         println!("the value is: {element}");
     }
 
-
     for number in (1..4).rev() {
         println!("{number}!");
     }
     println!("LIFTOFF!!!");
 
+    let mut s = String::from("hello");
+    println!("The string created on heap: {}", s);
+    s.push_str(" world!");
+
+    println!("s:{}", s);
+
+    //let s_temp = String::from("temp");
+
+    // let s_temp1 = s_temp;
+    // println!("{}, world!", s_temp); 
+    // this doesn't work because rust moved the value 
+    // and s_temp is not valid anymore
+
+    let s1 = String::from("hello");
+    let s2 = s1.clone();
+
+    println!("s1 = {}, s2 = {}", s1, s2);
+
+    //references
+    let s1 = String::from("hello");
+    let len = calculate_length(&s1);
+    println!("s1's len:{}", len);
+    
+}
+
+fn calculate_length(s: &String) -> usize {
+    s.len()
 }
