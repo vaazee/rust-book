@@ -107,6 +107,20 @@ fn main() {
     println!("{}, {}, and {}", r1, r2, r3);
 }
 ```
+Note that a reference’s scope starts from where it is introduced and continues through the last time that reference is used. For instance, this code will compile because the last usage of the immutable references, the println!, occurs before the mutable reference is introduced:
 
+```rust 
+fn main() {
+    let mut s = String::from("hello");
 
+    let r1 = &s; // no problem
+    let r2 = &s; // no problem
+    println!("{} and {}", r1, r2);
+    // variables r1 and r2 will not be used after this point
 
+    let r3 = &mut s; // no problem
+    println!("{}", r3);
+}
+```
+
+ In Rust, by contrast, the compiler guarantees that references will never be dangling references: if you have a reference to some data, the compiler will ensure that the data will not go out of scope before the reference to the data does. It prevents them with a compiler error. 
