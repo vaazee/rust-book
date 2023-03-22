@@ -86,8 +86,8 @@ fn main() {
     //let s_temp = String::from("temp");
 
     // let s_temp1 = s_temp;
-    // println!("{}, world!", s_temp); 
-    // this doesn't work because rust moved the value 
+    // println!("{}, world!", s_temp);
+    // this doesn't work because rust moved the value
     // and s_temp is not valid anymore
 
     let s1 = String::from("hello");
@@ -99,9 +99,43 @@ fn main() {
     let s1 = String::from("hello");
     let len = calculate_length(&s1);
     println!("s1's len:{}", len);
-    
+
+    let user1 = User {
+        active: true,
+        username: String::from("someusername123"),
+        email: String::from("someone@example.com"),
+        sign_in_count: 1,
+    };
+    println!("User1 info: {}, {}, {}, {}", user1.active, user1.username, user1.email, user1.sign_in_count);
+    let user2 = build_user(String::from("hello@gmail.com"), String::from("user2"));
+
+    println!("User2 info: {}, {}, {}, {}", user2.active, user2.username, user2.email, user2.sign_in_count);
+
+    let user3 = User {
+        email: String::from("another@example.com"),
+        ..user2
+    };
+
+    println!("User3 info: {}, {}, {}, {}", user3.active, user3.username, user3.email, user3.sign_in_count);
+
 }
 
 fn calculate_length(s: &String) -> usize {
     s.len()
+}
+
+struct User {
+    active: bool,
+    username: String,
+    email: String,
+    sign_in_count: u64,
+}
+
+fn build_user(email: String, username: String) -> User {
+    User {
+        active: true,
+        username,
+        email,
+        sign_in_count: 1,
+    }
 }
